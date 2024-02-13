@@ -13,6 +13,7 @@ Proporciona una interfaz para que los usuarios realicen diversas acciones relaci
 ## Tecnologías Utilizadas
 
 - **PHP**: Lenguaje de programación del lado del servidor.
+- **MySQL**: Sistema de gestión de bases de datos relacional.
 - **HTML y CSS con Bootstrap**: Para la estructura y el diseño de la interfaz de usuario.
 
 ## Participante del proyecto
