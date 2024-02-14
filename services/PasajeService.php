@@ -1,10 +1,10 @@
 <?php
 
-    class VueloService{
+    class PasajeService{
 
         //GET
         function request_curl() {
-            $urlmiservicio = "http://localhost/_servWeb/servicioVuelos/Vuelos.php";
+            $urlmiservicio = "http://localhost/_servWeb/servicioVuelos/Pasaje.php";
             $conexion = curl_init();
 
             //Url de la petición
@@ -29,4 +29,4 @@
         }
 
     }
-    
+

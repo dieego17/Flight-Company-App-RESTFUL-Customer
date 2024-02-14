@@ -4,7 +4,12 @@
     include 'services/VueloService.php';
     include 'views/VueloView.php';
     
+    include 'controllers/PasajeController.php';
+    include 'services/PasajeService.php';
+    include 'views/PasajeView.php';
+    
     include 'services/Vuelo.php';
+    include 'services/Pasaje.php';
 
     // Define la acción por defecto
     define('ACCION_DEFECTO', 'mostrarVuelos');
