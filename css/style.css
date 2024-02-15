@@ -12,12 +12,7 @@
     text-align: center;
     margin: 10px 0px 30px;
 }
-.table__vuelos{
-    
-}
-.table__thead{
-    
-}
+
 .th__table, .td__table{
     text-align: center;
     border-bottom: 1px solid gray;
@@ -25,4 +20,25 @@
 .table__thead{
     background: #778899;
 }
+.td__table--actions{
+    display: flex;
+    padding: 0px 5px;
+}
 
+.fa-pen{
+    color: #ffffff;
+}
+.form__insert{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.container__input{
+    margin: 10px 0px;
+}
+.label__form{
+    padding: 0px 5px;
+}
+.input__radio{
+    padding: 0px 20px;
+}

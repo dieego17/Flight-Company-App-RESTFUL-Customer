@@ -24,7 +24,7 @@
             //print_r($pasajes);
             $arraydePasaje = array();
 
-            foreach ($pasajes as $pasaje) {
+            foreach ($pasajes['resgistros'] as $pasaje) {
 
                 $idpasaje = $pasaje['idpasaje'];
                 $pasajerocod = $pasaje['pasajerocod'];
@@ -39,5 +39,20 @@
             }
 
             $this->view->getPasajes($arraydePasaje);
+        }
+        
+        public function mostrarMenuInsert() {
+            $pasajes = json_decode($this->service->request_curl(), true);
+            $arrayPasaje = array();
+            
+            foreach ($pasajes['registros1'] as $pasaje) {
+                print_r($pasaje);
+            }
+
+            foreach ($pasajes['registros2'] as $pasaje) {
+                print_r($pasaje);
+            }
+
+            $this->view->mostrarMenuInsert($arrayPasaje);
         }
     }

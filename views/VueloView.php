@@ -22,7 +22,6 @@
                             <th class="th__table">Tipo de Vuelo</th>
                             <th class="th__table">Fecha</th>
                             <th class="th__table">Número Pasajeros</th>
-                            <th class="th__table">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,12 +39,6 @@
                                     <td class="td__table"> <?php echo $vuelo->getTipovuelo(); ?> </td>
                                     <td class="td__table"> <?php echo $vuelo->getFechavuelo(); ?> </td>
                                     <td class="td__table"> <?php echo $vuelo->getNumpasajeros(); ?> </td>
-                                    <td class="td__table"> 
-                                        <form action="action" method="">
-                                            <input type="hidden" name="id" value="<?php echo $vuelo->getIdentificador(); ?>">
-                                            <button class="form__button--input" type="submit">VER DETALLES</button>
-                                        </form>
-                                    </td>
                                 </tr> 
                                 <?php
                             }
@@ -54,7 +47,6 @@
                 </table>
             </div>
         <!-- FIN TABLA -->
-        
         <?php
         }
     }

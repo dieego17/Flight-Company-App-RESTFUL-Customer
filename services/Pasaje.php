@@ -8,6 +8,7 @@
         private $numasiento;
         private $clase;
         private $pvp;
+
         
         public function __construct($idpasaje, $pasajerocod, $identificador, $numasiento, $clase, $pvp) {
             $this->idpasaje = $idpasaje;
