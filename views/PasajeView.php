@@ -66,9 +66,14 @@
                                         </div>
                                         
                                         <!-- UPDATE PASAJE -->
-                                        <form action="index.php?controller=Pasaje&action=updatePasaje" method="POST">
+                                        <form action="index.php?controller=Pasaje&action=mostrarUpdatePasaje" method="POST">
                                             <input type="hidden" name="idpasaje" value="<?php echo $pasaje->getIdpasaje(); ?>">
-                                            <button type="button" class="btn btn-warning"><i class="fa-solid fa-pen"></i></button>
+                                            <input type="hidden" name="pasajerocod" value="<?php echo $pasaje->getPasajerocod(); ?>">
+                                            <input type="hidden" name="identificador" value="<?php echo $pasaje->getIdentificador(); ?>">
+                                            <input type="hidden" name="numasiento" value="<?php echo $pasaje->getNumasiento(); ?>">
+                                            <input type="hidden" name="clase" value="<?php echo $pasaje->getClase(); ?>">
+                                            <input type="hidden" name="pvp" value="<?php echo $pasaje->getPvp(); ?>">
+                                            <button type="submit" class="btn btn-warning"><i class="fa-solid fa-pen"></i></button>
                                         </form>
                                     </td>
                                 </tr> 
@@ -88,13 +93,13 @@
         <div class="container">
             <h1 class="h1__title">Insertar Pasaje</h1>
             <div class="form__insert" >
-                <form action="action" method="">
+                <form action="index.php?controller=Pasaje&action=insertarPasaje" method="POST">
                     <div class="container__input">
                         <label class="label__form">Selecciona Pasajero:</label>
-                        <select>
+                        <select name='pasajerocod'>
                             <?php
                                 foreach ($arrayPasajero as $pasaje) {
-                                    echo '<option value="value">'.$pasaje->getPasajerocod().'-'.$pasaje->getIdpasaje().'</option>';
+                                    echo '<option required name="pasajerocod" value="'.$pasaje->getPasajerocod().'">'.$pasaje->getPasajerocod().'-'.$pasaje->getIdpasaje().'</option>';
                                 }
                             ?>
 
@@ -102,11 +107,11 @@
                     </div>
                     <div class="container__input">
                         <label class="label__form"class="label__form">Selecciona Identificador de vuelo:</label>
-                        <select>
+                        <select name="identificador">
                             <?php
                                 foreach ($arrayVuelos as $pasaje) {
 
-                                    echo '<option value="value">'.$pasaje->getIdpasaje().' - '.$pasaje->getPasajerocod().' - '.$pasaje->getIdentificador().'</option>';
+                                    echo '<option required name="identificador" value="'.$pasaje->getIdpasaje().'">'.$pasaje->getIdpasaje().' - '.$pasaje->getPasajerocod().' - '.$pasaje->getIdentificador().'</option>';
                                 }
                             ?>
 
@@ -114,23 +119,61 @@
                     </div>
                     <div class="container__input">
                         <label class="label__form">Selecciona de asiento:</label>
-                        <input type="number" name="numasiento" value="numasiento" min="1" max="400">
+                        <input type="number" name="numasiento" required value="numasiento" min="1" max="400">
                     </div>
                     <div class="container__input">
                         <label>Marca la clase:</label>
-                        <input class="input__radio" type="radio" name="clase" value="turista">TURISTA
-                        <input class="input__radio" type="radio" name="clase" value="primera">PRIMERA
-                        <input class="input__radio" type="radio" name="clase" value="business">BUSINESS
+                        <input class="input__radio" type="radio" name="clase" value="TURISTA" required>TURISTA
+                        <input class="input__radio" type="radio" name="clase" value="PRIMERA">PRIMERA
+                        <input class="input__radio" type="radio" name="clase" value="BUSINESS">BUSINESS
                     </div>
                     <div class="container__input">
                         <label class="label__form">PVP:</label>
-                        <input type="number" name="pvp" value="pvp" min="1">
+                        <input type="number" required name="pvp" value="pvp" min="1">
                     </div>
                     <button type="submit">Insertar Pasaje</button>
                 </form>
             </div>
         </div>
 <?php    
+        }
+        
+        public function mostrarMenuUpdate($idpasaje, $pasajerocod, $identificador, $numasiento, $clase, $pvp) {
+?>
+        <div class="container">
+            <h1 class="h1__title">Modificar Pasaje</h1>
+            <div class="form__insert" >
+                <form action="index.php?controller=Pasaje&action=updatePasaje" method="POST">
+                    <div class="container__input">
+                        <input type="hidden" name='idpasaje' value="<?php echo $idpasaje ?>">
+                    </div>
+                    <div class="container__input">
+                        <label class="label__form"class="label__form">Código del pasajero:</label>
+                        <input type="number" required name="pasajerocod" value="<?php echo $pasajerocod ?>">
+                    </div>
+                    <div class="container__input">
+                        <label class="label__form">Identificador del vuelo:</label>
+                        <input type="text" required name='identificador' min='1' value="<?php echo $identificador ?>">
+                    </div>
+                    <div class="container__input">
+                        <label class="label__form">Número del asiento:</label>
+                        <input type="text" required name='numasiento' min='1' value="<?php echo $numasiento ?>">
+                    </div>
+                    <div class="container__input">
+                        <label>Marca la clase:</label>
+                        <input class="input__radio" type="radio" name="clase" value="TURISTA" required>TURISTA
+                        <input class="input__radio" type="radio" name="clase" value="PRIMERA">PRIMERA
+                        <input class="input__radio" type="radio" name="clase" value="BUSINESS">BUSINESS
+                    </div>
+                    <div class="container__input">
+                        <label class="label__form">PVP:</label>
+                        <input type="number" required name="pvp" value="<?php echo $pvp ?>" min="1">
+                    </div>
+                    <button type="submit">Modificar Pasaje</button>
+                </form>
+            </div>
+        </div>
+<?php
         }
     }
 ?>

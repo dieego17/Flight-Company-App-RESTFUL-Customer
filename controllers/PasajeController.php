@@ -72,6 +72,30 @@
             $this->view->mostrarMenuInsert($arrayPasajero, $arrayVuelos);
         }
         
+        /**
+         * Función que sirve para recoger los parámetros del formulario y darselos al servicio
+         * para que compruebe si se puede insertar un nuevo pasaje o no
+         * 
+         */
+        public function insertarPasaje() {
+            
+            $pasajerocod = $_POST['pasajerocod'];
+            $identificador = $_POST['identificador'];
+            $numasiento = $_POST['numasiento'];
+            $clase = $_POST['clase'];
+            $pvp = $_POST['pvp'];
+            
+            $this->service->request_post($pasajerocod, $identificador, $numasiento, $clase, $pvp);
+            
+            header('Location: index.php?controller=Pasaje&action=mostrarPasajes');
+
+        }
+        
+        /**
+         * Función para borrar el pasaje seleccionado en la vista que se trae por el método POST
+         * y a su vez se llama al servicio para borrar dicho pasaje
+         * 
+         */
         public function eliminarPasaje() {
             $idpasaje = $_POST['idpasaje'];
             
@@ -80,4 +104,40 @@
             header('Location: index.php?controller=Pasaje&action=mostrarPasajes');
             
         }
+        
+        /**
+         * Recibo los datos del pasaje seleccionado y los muestro en la vista para posteriormente
+         * mediante un formulario actualizar el pasaje
+         */
+        public function mostrarUpdatePasaje() {
+            
+            $idpasaje = $_POST['idpasaje'];
+            $pasajerocod = $_POST['pasajerocod'];
+            $identificador = $_POST['identificador'];
+            $numasiento = $_POST['numasiento'];
+            $clase = $_POST['clase'];
+            $pvp = $_POST['pvp'];
+           
+
+            $this->view->mostrarMenuUpdate($idpasaje, $pasajerocod, $identificador, $numasiento, $clase, $pvp);
+        }
+        
+        /**
+         * Función para recibir registros y estos mandarlos al servicio para que se compruebe el pasaje
+         * seleccionado y sus atributos y si es cocrecto, se actualizará
+         * 
+         */
+        public function updatePasaje() {
+            
+            $idpasaje = $_POST['idpasaje'];
+            $pasajerocod = $_POST['pasajerocod'];
+            $identificador = $_POST['identificador'];
+            $numasiento = $_POST['numasiento'];
+            $clase = $_POST['clase'];
+            $pvp = $_POST['pvp'];
+            
+            $this->service->request_put($idpasaje, $pasajerocod, $identificador, $numasiento, $clase, $pvp);
+            
+        }
+        
     }
