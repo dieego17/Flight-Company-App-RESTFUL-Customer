@@ -109,7 +109,7 @@
             curl_close($conexion);
         }
         
-        //POST Van datos, se pone el Content-Length del envío+
+        //POST Van datos, se pone el Content-Length del envío
         function request_post($pasajerocod, $identificador, $numasiento, $clase, $pvp) {
             $envio = json_encode(array("pasajerocod" => $pasajerocod, "identificador" => $identificador, "numasiento" => $numasiento, "clase" => $clase, "pvp" => $pvp));
             $urlmiservicio = "http://localhost/_servWeb/servicioVuelos/Pasaje.php/";

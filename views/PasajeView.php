@@ -175,6 +175,30 @@
         </div>
 <?php
         }
+        
+        public function mostrarMenuVuelo($arrayVuelos) {
+                
+?>
+        <div class="container">
+            <h1 class="h1__title">Lista Identificador Vuelo</h1>
+                <div class="form__insert">
+                <form action="action" method="POST">
+                    <div class="container__input">
+                        <select name="identificador">
+<?php
+                            foreach ($arrayVuelos as $vuelo) {
+                                echo '<option value="'.$vuelo->getIdentificador().'">'.$vuelo->getIdentificador().'</option>';
+                            }
+?>               
+                        </select>
+                    </div>
+                    <button type="submit">Seleccionar Identificador</button>
+                </form>
+            </div>
+        </div>
+            
+<?php
+        }
     }
 ?>
 

@@ -140,4 +140,20 @@
             
         }
         
+        public function mostrarMenuIdentificadores() {
+            $pasajes = json_decode($this->service->request_curl(), true);
+            
+            $arrayVuelos = array();
+            
+             foreach ($pasajes['registros2'] as $pasaje) {
+                
+                $selectDatosVuelos = new Pasaje($pasaje['identificador'], $pasaje['aeropuertoorigen'], $pasaje['identificador'], $pasaje['aeropuertodestino'], $pasaje['identificador'], $pasaje['identificador'], $pasaje['identificador'], $pasaje['identificador'], $pasaje['identificador'], $pasaje['identificador']);
+                
+                array_push($arrayVuelos, $selectDatosVuelos);
+            }
+            
+            $this->view->mostrarMenuVuelo($arrayVuelos);
+            
+        }
+        
     }

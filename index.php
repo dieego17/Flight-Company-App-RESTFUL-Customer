@@ -24,6 +24,9 @@
                   <li class="nav-item">
                     <a class="nav-link active nav__link" aria-current="page" href="index.php?controller=Pasaje&action=mostrarMenuInsert">Insertar Pasaje</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link active nav__link" aria-current="page" href="index.php?controller=Pasaje&action=mostrarMenuIdentificadores">Ver Identificadores Vuelos</a>
+                  </li>
                 </ul>
               </div>
             </div>
