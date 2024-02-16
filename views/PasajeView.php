@@ -5,11 +5,11 @@
         public function getPasajes($arraydePasaje) {
 ?>
         
-            <div class="container">
+            <div class="container container__pasaje">
                 <h1 class="h1__title">Todos los Pasajes</h1>
                 <!-- INICIO TABLA -->
-                <table class="table__vuelos">
-                    <thead class="table__thead">
+                <table class="table__pasaje">
+                    <thead class="table__thead table__thead--pasaje">
                         <tr>
                             <th class="th__table">Id Pasaje</th>
                             <th class="th__table">Código Pasajero</th>
@@ -36,7 +36,7 @@
                                     <td class="td__table"> <?php echo $pasaje->getIdentificador(); ?> </td>
                                     <td class="td__table"> <?php echo $pasaje->getNumasiento(); ?> </td>
                                     <td class="td__table"> <?php echo $pasaje->getClase(); ?> </td>
-                                    <td class="td__table"> <?php echo $pasaje->getPvp(); ?> </td>
+                                    <td class="td__table"> <?php echo $pasaje->getPvp(); ?>€ </td>
                                     <td class="td__table td__table--actions"> 
                                         <!-- Button trigger modal for delete pasaje -->
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#<?php echo $modalEliminarID ?>">
@@ -58,7 +58,7 @@
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
                                                 <form action="index.php?controller=Pasaje&action=eliminarPasaje" method="POST">
                                                     <input type="hidden" name="idpasaje" value="<?php echo $pasaje->getIdpasaje(); ?>">
-                                                    <button type="button" class="btn btn-danger">ELIMINAR</button>
+                                                    <button type="submit" class="btn btn-danger">ELIMINAR</button>
                                                 </form>
                                               </div>
                                             </div>
@@ -83,7 +83,7 @@
         <?php
         }
         
-        public function mostrarMenuInsert($arrayPasaje) {
+        public function mostrarMenuInsert($arrayPasajero, $arrayVuelos) {
 ?>
         <div class="container">
             <h1 class="h1__title">Insertar Pasaje</h1>
@@ -93,8 +93,8 @@
                         <label class="label__form">Selecciona Pasajero:</label>
                         <select>
                             <?php
-                                foreach ($arrayPasaje as $pasaje) {
-                                    echo '<option value="value">'.$pasaje->getPasajerocod().'-</option>';
+                                foreach ($arrayPasajero as $pasaje) {
+                                    echo '<option value="value">'.$pasaje->getPasajerocod().'-'.$pasaje->getIdpasaje().'</option>';
                                 }
                             ?>
 
@@ -104,8 +104,9 @@
                         <label class="label__form"class="label__form">Selecciona Identificador de vuelo:</label>
                         <select>
                             <?php
-                                foreach ($arrayPasaje as $pasaje) {
-                                    echo '<option value="value">'.$pasaje->getPasajerocod().'-</option>';
+                                foreach ($arrayVuelos as $pasaje) {
+
+                                    echo '<option value="value">'.$pasaje->getIdpasaje().' - '.$pasaje->getPasajerocod().' - '.$pasaje->getIdentificador().'</option>';
                                 }
                             ?>
 

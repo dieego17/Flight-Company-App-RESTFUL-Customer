@@ -8,6 +8,11 @@
 .container{
     padding: 30px 0px;
 }
+.container__pasaje{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .h1__title{
     text-align: center;
     margin: 10px 0px 30px;
@@ -16,13 +21,17 @@
 .th__table, .td__table{
     text-align: center;
     border-bottom: 1px solid gray;
+    padding: 10px 0px;
+    font-size: 1.1rem;
 }
 .table__thead{
     background: #778899;
 }
 .td__table--actions{
     display: flex;
-    padding: 0px 5px;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
 }
 
 .fa-pen{

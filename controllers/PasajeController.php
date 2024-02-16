@@ -41,18 +41,43 @@
             $this->view->getPasajes($arraydePasaje);
         }
         
+        /**
+         * Función que recoge un array multidimensional de pasajes
+         * Creo objetos con ese array y paso cada uno de esos arrays divididos a la vista
+         */
         public function mostrarMenuInsert() {
             $pasajes = json_decode($this->service->request_curl(), true);
-            $arrayPasaje = array();
+            
+            $arrayPasajero = array();
+            $arrayVuelos = array();
+
             
             foreach ($pasajes['registros1'] as $pasaje) {
-                print_r($pasaje);
+                //print_r($pasaje);
+                
+                $selectDatosPasajero = new Pasaje($pasaje['nombre'], $pasaje['pasajerocod'], $pasaje['nombre'], $pasaje['pasajerocod'], $pasaje['nombre'], $pasaje['pasajerocod']);
+                
+                array_push($arrayPasajero, $selectDatosPasajero);
             }
 
             foreach ($pasajes['registros2'] as $pasaje) {
-                print_r($pasaje);
+                //print_r($pasaje);
+                $selectDatosVuelos = new Pasaje($pasaje['identificador'], $pasaje['aeropuertoorigen'], $pasaje['aeropuertodestino'], $pasaje['identificador'], $pasaje['identificador'], $pasaje['identificador']);
+                
+                array_push($arrayVuelos, $selectDatosVuelos);
             }
 
-            $this->view->mostrarMenuInsert($arrayPasaje);
+            //print_r($arrayPasajero);
+            //print_r($arrayVuelos);
+            $this->view->mostrarMenuInsert($arrayPasajero, $arrayVuelos);
+        }
+        
+        public function eliminarPasaje() {
+            $idpasaje = $_POST['idpasaje'];
+            
+            $this->service->request_delete($idpasaje);
+            
+            header('Location: index.php?controller=Pasaje&action=mostrarPasajes');
+            
         }
     }
