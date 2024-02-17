@@ -156,4 +156,11 @@
             
         }
         
+        public function identificadorSelecc() {
+            $identificador = $_POST['identificador'];
+            
+            $this->view->identificadorSeleccionado($identificador);
+            
+        }
+        
     }

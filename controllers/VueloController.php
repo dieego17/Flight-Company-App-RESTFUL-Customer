@@ -42,5 +42,22 @@
 
                 $this->view->mostrarTodosVuelos($arraydeVuelos);
             }
+            
+            public function mostrarUnVuelo() {
+                
+                $identificador = $_POST['identificador'];       
+                
+                $objet_res = $this->service->request_uno($identificador);
+                
+                $arrayVuelo = array();
+                
+                foreach ($objet_res as $value) {
+                    $vuelo = new Vuelo($value['identificador'], $value['aeropuertoorigen'], $value['nombreorigen'], $value['paisorigen'], $value['aeropuertodestino'], $value['nombredestino'], $value['paisdestino'], $value['tipovuelo'], $value['fechavuelo'], $value['numpasajero']);
+                
+                    array_push($arrayVuelo, $vuelo);
+                }
+                
+                $this->view->mostrarUnVuelo($arrayVuelo);
+            }
 
     }

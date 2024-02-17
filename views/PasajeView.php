@@ -182,7 +182,7 @@
         <div class="container">
             <h1 class="h1__title">Lista Identificador Vuelo</h1>
                 <div class="form__insert">
-                <form action="action" method="POST">
+                <form action="index.php?controller=Pasaje&action=identificadorSelecc" method="POST">
                     <div class="container__input">
                         <select name="identificador">
 <?php
@@ -197,6 +197,34 @@
             </div>
         </div>
             
+<?php
+        }
+        public function identificadorSeleccionado($identificador) {
+?>
+        
+        <div class="container">
+            <div class="container__title">
+                <h1 class="h1__title">Identificador Vuelo</h1>
+                <a class="lin__volver" href="index.php?controller=Pasaje&action=mostrarMenuIdentificadores">VOLVER</a>
+            </div>
+                <div class="form__insert form__insert--ident">
+                    <p>Has seleccionado el vuelo con el identificador: <strong><?php echo $identificador ?></strong></p>
+                    <div class="div__form">
+                        <div class="container__form">
+                            <form action="index.php?controller=Vuelo&action=mostrarUnVuelo" method="POST">
+                                <input type="hidden" name="identificador" value="<?php echo $identificador ?>">
+                                <button type="submit">Detalle vuelo <i class="fa-solid fa-plane"></i></button>
+                            </form>
+                        </div>
+                        <div class="container__form">
+                            <form action="index.php?controller=Pasaje&action=mostrarUnPasaje" method="POST">
+                                <input type="hidden" name="identificador" value="<?php echo $identificador ?>">
+                                <button type="submit">Detalle pasaje <i class="fa-solid fa-ticket"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
 <?php
         }
     }
