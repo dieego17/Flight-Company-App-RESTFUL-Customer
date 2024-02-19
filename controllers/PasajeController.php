@@ -117,9 +117,30 @@
             $numasiento = $_POST['numasiento'];
             $clase = $_POST['clase'];
             $pvp = $_POST['pvp'];
+            
+            $pasajes = json_decode($this->service->request_curl(), true);
+            
+            $arrayPasajero = array();
+            $arrayVuelos = array();
+
+            
+            foreach ($pasajes['registros1'] as $pasaje) {
+                //print_r($pasaje);
+                
+                $selectDatosPasajero = new Pasaje($pasaje['nombre'], $pasaje['pasajerocod'], $pasaje['nombre'], $pasaje['pasajerocod'], $pasaje['nombre'], $pasaje['pasajerocod']);
+                
+                array_push($arrayPasajero, $selectDatosPasajero);
+            }
+
+            foreach ($pasajes['registros2'] as $pasaje) {
+                //print_r($pasaje);
+                $selectDatosVuelos = new Pasaje($pasaje['identificador'], $pasaje['aeropuertoorigen'], $pasaje['aeropuertodestino'], $pasaje['identificador'], $pasaje['identificador'], $pasaje['identificador']);
+                
+                array_push($arrayVuelos, $selectDatosVuelos);
+            }
            
 
-            $this->view->mostrarMenuUpdate($idpasaje, $pasajerocod, $identificador, $numasiento, $clase, $pvp);
+            $this->view->mostrarMenuUpdate($idpasaje, $pasajerocod, $identificador, $numasiento, $clase, $pvp, $arrayVuelos, $arrayPasajero);
         }
         
         /**
@@ -160,6 +181,24 @@
             $identificador = $_POST['identificador'];
             
             $this->view->identificadorSeleccionado($identificador);
+            
+        }
+        
+        public function mostrarUnPasaje() {
+            $identificador = $_POST['identificador'];
+            
+            $objet_res = $this->service->request_uno($identificador);
+            
+            $arrayPasaje = array();
+                
+                foreach ($objet_res as $value) {
+                    
+                    $pasaje = new Pasaje($value['idpasaje'], $value['pasajerocod'], $value['nombre'], $value['numasiento'], $value['clase'], $value['pvp']);
+                
+                    array_push($arrayPasaje, $pasaje);
+                }
+            
+            $this->view->mostrarUnPasaje($arrayPasaje, $identificador);
             
         }
         

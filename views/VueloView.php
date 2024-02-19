@@ -20,7 +20,6 @@
                             <th class="th__table">Nombre Aeropuerto Destino</th>
                             <th class="th__table">País Destino</th>
                             <th class="th__table">Tipo de Vuelo</th>
-                            <th class="th__table">Fecha</th>
                             <th class="th__table">Número Pasajeros</th>
                         </tr>
                     </thead>
@@ -37,7 +36,6 @@
                                     <td class="td__table"> <?php echo $vuelo->getNombredestino(); ?> </td>
                                     <td class="td__table"> <?php echo $vuelo->getPaisdestino(); ?> </td>
                                     <td class="td__table"> <?php echo $vuelo->getTipovuelo(); ?> </td>
-                                    <td class="td__table"> <?php echo $vuelo->getFechavuelo(); ?> </td>
                                     <td class="td__table"> <?php echo $vuelo->getNumpasajeros(); ?> </td>
                                 </tr> 
                                 <?php
@@ -78,7 +76,6 @@
                             <th class="th__table">Nombre Aeropuerto Destino</th>
                             <th class="th__table">País Destino</th>
                             <th class="th__table">Tipo de Vuelo</th>
-                            <th class="th__table">Fecha</th>
                             <th class="th__table">Número Pasajeros</th>
                         </tr>
                     </thead>
@@ -95,7 +92,6 @@
                                     <td class="td__table"> <?php echo $vuelo->getNombredestino(); ?> </td>
                                     <td class="td__table"> <?php echo $vuelo->getPaisdestino(); ?> </td>
                                     <td class="td__table"> <?php echo $vuelo->getTipovuelo(); ?> </td>
-                                    <td class="td__table"> <?php echo $vuelo->getFechavuelo(); ?> </td>
                                     <td class="td__table"> <?php echo $vuelo->getNumpasajeros(); ?> </td>
                                 </tr> 
                                 <?php

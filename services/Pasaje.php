@@ -66,8 +66,7 @@
         public function setPvp($pvp): void {
             $this->pvp = $pvp;
         }
-
-
         
+
     }
 

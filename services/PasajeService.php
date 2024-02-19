@@ -28,9 +28,9 @@
             curl_close($conexion);
         }
         
-        //GET con un dep
-        function request_uno($idpasaje) {
-            $urlmiservicio = "http://localhost/_servWeb/servicioVuelos/Pasaje.php?idpasaje=".$idpasaje;
+        //GET con un pasaje
+        function request_uno($identificador) {
+            $urlmiservicio = "http://localhost/_servWeb/servicioVuelos/Pasaje.php?identificador=".$identificador;
             $conexion = curl_init();
             
             //Url de la petición
@@ -47,8 +47,10 @@
             $res = curl_exec($conexion);
             
             if ($res) {
-                echo "<br>Salida request_curl<br>";
-                print_r($res);
+                //echo "<br>Salida request_curl<br>";
+                //print_r($res);
+                $objet_res = json_decode($res, true);
+                return($objet_res);
             }
             curl_close($conexion);
         }
