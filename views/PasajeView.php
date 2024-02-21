@@ -7,6 +7,32 @@
         
             <div class="container container__pasaje">
                 <h1 class="h1__title">Todos los Pasajes</h1>
+                <?php
+                    if (isset($_GET["delete"]) == 'success') {
+                ?>
+                        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                            <strong>PASAJE BORRADO CORRECTAMENTE</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                <?php
+                    }
+                    if (isset($_GET["insert"])) {
+                ?>
+                        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                            <strong>ERROR AL INSERTAR</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                <?php
+                    }
+                    if (isset($_GET["success"]) == 'true') {
+                ?>
+                        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                            <strong>PASAJE INSERTADO CORRECTAMENTE</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                <?php
+                    }
+                ?>
                 <!-- INICIO TABLA -->
                 <table class="table__pasaje">
                     <thead class="table__thead table__thead--pasaje">
@@ -256,13 +282,13 @@
 <?php
         }
         
-         public function mostrarUnPasaje($arrayPasaje, $identificador) {
+        public function mostrarUnPasaje($arraydePasajes, $arraydePasajeros, $id) {
 ?>
         <div class="container">
                 <div class="container__title">
                     <h1 class="h1__title">Detalles del Pasaje</h1>
                     <form action="index.php?controller=Pasaje&action=identificadorSelecc" method="POST">
-                        <input type="hidden" name="identificador" value="<?php echo $identificador ?>">
+                        <input type="hidden" name="identificador" value="<?php echo $id ?>">
                         <button class="lin__volver">VOLVER</button>
                     </form>
                 </div>
@@ -280,26 +306,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                            foreach ($arrayPasaje as $pasaje) {
-                                ?>
-                                <tr>
-                                    <td class="td__table"> <?php echo $pasaje->getIdpasaje(); ?> </td>
-                                    <td class="td__table"> <?php echo $pasaje->getPasajerocod(); ?> </td>
-                                    <td class="td__table"> <?php echo $pasaje->getIdentificador(); ?> </td>
-                                    <td class="td__table"> <?php echo $pasaje->getNumasiento(); ?> </td>
-                                    <td class="td__table"> <?php echo $pasaje->getClase(); ?> </td>
-                                    <td class="td__table"> <?php echo $pasaje->getPvp(); ?> </td>
-                                </tr> 
-                                <?php
-                            }
+                        <?php foreach ($arraydePasajes as $index => $pasaje) {
+                            $pasajero = $arraydePasajeros[$index];
                         ?>
+                            <tr>
+                                <td class="td__table"><?php echo $pasaje->getIdpasaje(); ?></td>
+                                <td class="td__table"><?php echo $pasaje->getPasajerocod(); ?></td>
+                                <td class="td__table"><?php echo $pasajero->getNombre(); ?></td>
+                                <td class="td__table"><?php echo $pasajero->getPais(); ?></td>
+                                <td class="td__table"><?php echo $pasaje->getNumasiento(); ?></td>
+                                <td class="td__table"><?php echo $pasaje->getClase(); ?></td>
+                                <td class="td__table"><?php echo $pasaje->getPvp(); ?>€</td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
         <!-- FIN TABLA -->
 <?php
-         }
+        }
+        
+        public function noExistePasaje($id) {
+        ?>
+        <div class="container bg-white rounded p-5 mt-5 d-flex flex-column justify-content-center">
+            <form class="align-items-center text-center" action="index.php?controller=Pasaje&action=identificadorSelecc" method="POST">
+                <input type="hidden" name="identificador" value="<?php echo $id ?>">
+                <button type="submit" class="btn btn-secondary mt-3">VOLVER</button>
+            </form>
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                <strong>NO EXISTEN PASAJES PARA ESTE VUELO</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        <?php
+            
+        }
     }
 ?>
 

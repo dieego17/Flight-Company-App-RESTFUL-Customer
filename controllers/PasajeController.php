@@ -85,9 +85,15 @@
             $clase = $_POST['clase'];
             $pvp = $_POST['pvp'];
             
-            $this->service->request_post($pasajerocod, $identificador, $numasiento, $clase, $pvp);
+            $inserccion = $this->service->request_post($pasajerocod, $identificador, $numasiento, $clase, $pvp);
             
-            header('Location: index.php?controller=Pasaje&action=mostrarPasajes');
+            if ($inserccion === false) {
+                header('Location: index.php?controller=Pasaje&action=mostrarPasajes&insert='. urlencode($inserccion));
+                exit(); // Asegura que no haya más salida después de la redirección 
+            } else {
+                header('Location: index.php?controller=Pasaje&action=mostrarPasajes&success=true');
+                exit(); // Asegura que no haya más salida después de la redirección
+            }
 
         }
         
@@ -99,10 +105,11 @@
         public function eliminarPasaje() {
             $idpasaje = $_POST['idpasaje'];
             
-            $this->service->request_delete($idpasaje);
+            $borrar = $this->service->request_delete($idpasaje);
             
-            header('Location: index.php?controller=Pasaje&action=mostrarPasajes');
-            
+            if($borrar == true){
+                header('Location: index.php?controller=Pasaje&action=mostrarPasajes&delete=success');
+            } 
         }
         
         /**
@@ -184,7 +191,7 @@
             
         }
         
-        public function mostrarUnPasaje() {
+        /*public function mostrarUnPasaje() {
             $identificador = $_POST['identificador'];
             
             $objet_res = $this->service->request_uno($identificador);
@@ -200,6 +207,33 @@
             
             $this->view->mostrarUnPasaje($arrayPasaje, $identificador);
             
+        }*/
+        
+        
+        public function mostrarUnPasaje() {
+            $id = $_POST['identificador'];
+
+            $res = json_decode($this->service->request_detalle($id), true);
+            //print_r($res);
+            
+            if ($res == false) {
+                $this->view->noExistePasaje($id);
+            } else {
+                $arraydePasajes = array();
+                foreach ($res["registros"] as $pasaje) {
+                    $pasajes = new Pasaje($pasaje['idpasaje'], $pasaje['pasajerocod'], $pasaje['identificador'], $pasaje['numasiento'], $pasaje['clase'], $pasaje['pvp']);
+                
+                    array_push($arraydePasajes, $pasajes);
+                }
+
+                $arraydePasajeros = array();
+                foreach ($res["registros1"] as $pasajero) {
+                    $pasajeros = new Pasajero($pasajero['pasajerocod'], $pasajero['nombre'], $pasajero['tlf'], $pasajero['direccion'], $pasajero['pais']);
+                    
+                    array_push($arraydePasajeros, $pasajeros);
+                }
+                $this->view->mostrarUnPasaje($arraydePasajes, $arraydePasajeros, $id);
+            }
         }
         
     }

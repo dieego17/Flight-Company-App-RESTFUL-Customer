@@ -8,8 +8,14 @@
     include 'services/PasajeService.php';
     include 'views/PasajeView.php';
     
+    include 'services/AeropuertoService.php';
+    include 'services/PasajeroService.php';
+    
+    
     include 'services/Vuelo.php';
     include 'services/Pasaje.php';
+    include 'services/Pasajero.php';
+    include 'services/Aeropuerto.php';
 
     // Define la acción por defecto
     define('ACCION_DEFECTO', 'mostrarVuelos');
