@@ -87,12 +87,11 @@
             
             $inserccion = $this->service->request_post($pasajerocod, $identificador, $numasiento, $clase, $pvp);
             
-            if ($inserccion === false) {
-                header('Location: index.php?controller=Pasaje&action=mostrarPasajes&insert='. urlencode($inserccion));
-                exit(); // Asegura que no haya más salida después de la redirección 
+            if ($inserccion == 1) {
+                header("Location: index.php?controller=Pasaje&action=mostrarPasajes&success=true");
             } else {
-                header('Location: index.php?controller=Pasaje&action=mostrarPasajes&success=true');
-                exit(); // Asegura que no haya más salida después de la redirección
+                header("Location: index.php?controller=Pasaje&action=mostrarPasajes&mensaje=$inserccion");
+
             }
 
         }
@@ -164,10 +163,23 @@
             $clase = $_POST['clase'];
             $pvp = $_POST['pvp'];
             
-            $this->service->request_put($idpasaje, $pasajerocod, $identificador, $numasiento, $clase, $pvp);
+            $actualizacion = $this->service->request_put($idpasaje, $pasajerocod, $identificador, $numasiento, $clase, $pvp);
+            
+            if ($actualizacion == 1 ) {
+                header('Location: index.php?controller=Pasaje&action=mostrarPasajes&actualizar=true');
+                exit();
+            } else {
+                header('Location: index.php?controller=Pasaje&action=mostrarPasajes&mensajeError='.$actualizacion);
+                exit();
+            }
             
         }
         
+        /**
+         * Este método muestra el menú de identificadores de vuelos.
+         * 
+         * Luego, prepara los datos necesarios y llama al método mostrarMenuVuelo() de la vista para mostrar el menú.
+         */
         public function mostrarMenuIdentificadores() {
             $pasajes = json_decode($this->service->request_curl(), true);
             
@@ -184,32 +196,23 @@
             
         }
         
+        /**
+         * Este método selecciona un identificador de vuelo en el menú.
+         * 
+         * Llama al método identificadorSeleccionado() de la vista para mostrar la información relacionada con el identificador seleccionado.
+         */
         public function identificadorSelecc() {
             $identificador = $_POST['identificador'];
             
             $this->view->identificadorSeleccionado($identificador);
             
         }
-        
-        /*public function mostrarUnPasaje() {
-            $identificador = $_POST['identificador'];
-            
-            $objet_res = $this->service->request_uno($identificador);
-            
-            $arrayPasaje = array();
-                
-                foreach ($objet_res as $value) {
-                    
-                    $pasaje = new Pasaje($value['idpasaje'], $value['pasajerocod'], $value['nombre'], $value['numasiento'], $value['clase'], $value['pvp']);
-                
-                    array_push($arrayPasaje, $pasaje);
-                }
-            
-            $this->view->mostrarUnPasaje($arrayPasaje, $identificador);
-            
-        }*/
-        
-        
+
+        /**
+         * Este método parece ser responsable de mostrar los detalles de un pasaje específico.
+         * 
+         * Llama al método mostrarUnPasaje() de la vista para mostrar los detalles del pasaje.
+         */
         public function mostrarUnPasaje() {
             $id = $_POST['identificador'];
 

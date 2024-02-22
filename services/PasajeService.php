@@ -106,8 +106,13 @@
             $res = curl_exec($conexion);
             
             if ($res) {
-                echo "<br>Salida request_put<br>";
-                print_r($res);
+                $response = json_decode($res, true);
+                //var_dump($response);
+                if (isset($response['mensaje']) && strpos($response['mensaje'], 'ERROR') !== false) {
+                    return $response['mensaje']; // Muestra el mensaje del resultado
+                } else {
+                    return true; // Si no hay mensaje de resultado en la respuesta
+                }
             }
             curl_close($conexion);
         }

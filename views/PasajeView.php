@@ -2,12 +2,18 @@
 
     class PasajeView{
         
+        /**
+         * Función para mostrar una lista de pasajes
+         * 
+         * @param type $arraydePasaje
+         */
         public function getPasajes($arraydePasaje) {
 ?>
         
             <div class="container container__pasaje">
                 <h1 class="h1__title">Todos los Pasajes</h1>
                 <?php
+                    //MENSAJE PARA SABER QUE SE HA BORRADO
                     if (isset($_GET["delete"]) == 'success') {
                 ?>
                         <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
@@ -16,18 +22,40 @@
                         </div>
                 <?php
                     }
-                    if (isset($_GET["insert"])) {
+                    //MENSAJE PARA SABER QUE SE INSERTO CORRECTAMENTE
+                    if (isset($_GET["success"]) == 'true') {
                 ?>
-                        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-                            <strong>ERROR AL INSERTAR</strong>
+                        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                            <strong>REGISTRO INSERTADO CORRECTAMENTE</strong>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                 <?php
                     }
-                    if (isset($_GET["success"]) == 'true') {
+                    //MENSAJE PARA SABER QUE SE HA ACTUALIZADO CORRECTAMENTE
+                    if (isset($_GET["actualizar"])) {
                 ?>
                         <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-                            <strong>PASAJE INSERTADO CORRECTAMENTE</strong>
+                            <strong>REGISTRO ACTUALIZADO CORRECTAMENTE</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                <?php
+                    }
+                    //MENSAJE DE ERROR A LA HORA DE ACTUALIZAR
+                    if(isset($_GET['mensajeError'])) {
+                        $mensaje = $_GET['mensajeError'];
+                ?>
+                        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                            <strong><?php echo $mensaje ?></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                <?php
+                    }
+                    //MENSAJE DE ERROR A LA HORA DE INSERTAR
+                    if(isset($_GET['mensaje'])) {
+                        $mensaje = $_GET['mensaje'];
+                ?>
+                        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                            <strong><?php echo $mensaje ?></strong>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                 <?php
@@ -114,6 +142,12 @@
         <?php
         }
         
+        /**
+         * Función para mostrar el menú de inserción de pasajes
+         * 
+         * @param type $arrayPasajero
+         * @param type $arrayVuelos
+         */
         public function mostrarMenuInsert($arrayPasajero, $arrayVuelos) {
 ?>
         <div class="container">
@@ -164,6 +198,18 @@
 <?php    
         }
         
+        /**
+         * Función para mostrar el menú de actualización de pasajes
+         * 
+         * @param type $idpasaje
+         * @param type $pasajerocod
+         * @param type $identificador
+         * @param type $numasiento
+         * @param type $clase
+         * @param type $pvp
+         * @param type $arrayVuelos
+         * @param type $arrayPasajero
+         */
         public function mostrarMenuUpdate($idpasaje, $pasajerocod, $identificador, $numasiento, $clase, $pvp, $arrayVuelos, $arrayPasajero) {
 ?>
         <div class="container">
@@ -230,6 +276,11 @@
 <?php
         }
         
+        /**
+         * Función para mostrar el menú de selección de vuelo
+         * 
+         * @param type $arrayVuelos
+         */
         public function mostrarMenuVuelo($arrayVuelos) {
                 
 ?>
@@ -282,9 +333,16 @@
 <?php
         }
         
+        /**
+         * Mostramos los pasajes para un vuelo
+         * 
+         * @param type $arraydePasajes
+         * @param type $arraydePasajeros
+         * @param type $id
+         */
         public function mostrarUnPasaje($arraydePasajes, $arraydePasajeros, $id) {
 ?>
-        <div class="container">
+        <div class="container container__pasaje">
                 <div class="container__title">
                     <h1 class="h1__title">Detalles del Pasaje</h1>
                     <form action="index.php?controller=Pasaje&action=identificadorSelecc" method="POST">
@@ -325,19 +383,22 @@
         <!-- FIN TABLA -->
 <?php
         }
-        
+        /**
+         * Muestra errores por si no exite pasajes para el vuelo
+         * @param type $id
+         */
         public function noExistePasaje($id) {
         ?>
-        <div class="container bg-white rounded p-5 mt-5 d-flex flex-column justify-content-center">
-            <form class="align-items-center text-center" action="index.php?controller=Pasaje&action=identificadorSelecc" method="POST">
-                <input type="hidden" name="identificador" value="<?php echo $id ?>">
-                <button type="submit" class="btn btn-secondary mt-3">VOLVER</button>
-            </form>
-            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-                <strong>NO EXISTEN PASAJES PARA ESTE VUELO</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="container bg-white rounded p-5 mt-5 d-flex flex-column justify-content-center">
+                <form class="align-items-center text-center" action="index.php?controller=Pasaje&action=identificadorSelecc" method="POST">
+                    <input type="hidden" name="identificador" value="<?php echo $id ?>">
+                    <button type="submit" class="btn btn-secondary mt-3">VOLVER</button>
+                </form>
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    <strong>NO EXISTEN PASAJES PARA ESTE VUELO</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             </div>
-        </div>
         <?php
             
         }
